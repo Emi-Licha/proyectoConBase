@@ -1,33 +1,38 @@
-class Productos {
-    constructor() {
-        this.productos = []
-        this.id = 0
+import Productos from '../models/productos.js'
+
+class ProductosController {
+
+    constructor() { }
+
+    async guardar(productos) {
+        try {
+            return await Productos.guardar(productos);
+        } catch (error) {
+            throw error;
+        }
     }
 
-    listar() {
-        return this.productos;
+    async buscar() {
+        try {
+            return await Productos.buscar();
+        } catch (error) {
+            throw error;
+        }
     }
-
-    listarAll() {
-        return this.productos.length? this.productos : {error : 'no hay productos cargados'}
+    async eliminar(condicion) {
+        try {
+            return await Productos.eliminar(condicion);
+        } catch (error) {
+            throw error;
+        }
     }
-
-    guardar(prod) {
-        prod.id = ++this.id
-        this.productos.push(prod)
+    async update(condicion, producto) {
+        try {
+            return await Productos.update(condicion, producto);
+        } catch (error) {
+            throw error;
+        }
     }
-
-    actualizar(prod,id) {
-        prod.id = Number(id)
-        let index = this.productos.findIndex( prod => prod.id == id)
-        this.productos.splice(index,1,prod)
-    }
-
-    borrar(id) {
-        let index = this.productos.findIndex( prod => prod.id == id)
-        return this.productos.splice(index,1)
-    }
-
 }
 
-export default Productos
+export default new ProductosController();
